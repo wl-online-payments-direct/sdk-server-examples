@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.worldline-solutions</groupId>
+    <artifactId>onlinepayments-sdk-java-example</artifactId>
+    <version>0.0.8</version>
+
+    <name>onlinepayments-sdk-java-example</name>
+    <description>Example application that uses Java SDK to communicate with the payment platform using the server API</description>
+
+    <organization>
+        <name>Worldline Online Payments Direct</name>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://github.com/wl-online-payments-direct/sdk-java-example/LICENSE.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Worldline Direct support team</name>
+            <email>82139942+worldline-direct-support-team@users.noreply.github.com</email>
+            <organization>Worldline Online Payments Direct</organization>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:wl-online-payments-direct/sdk-java-example.git</connection>
+        <developerConnection>scm:git:git@github.com:wl-online-payments-direct/sdk-java-example.git</developerConnection>
+        <url>https://github.com/wl-online-payments-direct/sdk-java-example</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/wl-online-payments-direct/sdk-java-example/issues</url>
+    </issueManagement>
+
+    <properties>
+        <java.version>11</java.version>
+        <online-payments.version>4.14.0</online-payments.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.worldline-solutions</groupId>
+            <artifactId>onlinepayments-sdk-java</artifactId>
+            <version>${online-payments.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hosted Tokenization - Basic</title>
+    <link rel="stylesheet" href="../cards.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+
+    <script src="basic.js"></script>
+</head>
+<body>
+
+<!-- Hosted tokenization form -->
+<div class="form-container">
+    <form id="hosted-tokenization-basic-form" class="payment-form">
+        <div class="form-group-header">
+            <h1><a id="header" href="/">Hosted Tokenization - Basic</a></h1>
+        </div>
+        <div class="form-group">
+            <label for="hosted-tokenization-amount">Amount:</label>
+            <input type="text" id="hosted-tokenization-amount" required>
+        </div>
+        <div class="form-group">
+            <label for="hosted-tokenization-currency">Currency:</label>
+            <select id="hosted-tokenization-currency">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+            </select>
+        </div>
+        <button type="button" onclick="initHostedTokenization()">Hosted Tokenization - Basic</button>
+    </form>
+    <form id="hosted-tokenization-iframe" class="payment-form hidden">
+        <div id="div-hosted-tokenization"></div>
+        <button id="submit-button" type="button" onclick="submitForm()">Confirm</button>
+    </form>
+</div>
+
+<script src="https://payment.preprod.direct.worldline-solutions.com/hostedtokenization/js/client/tokenizer.min.js"></script>
+<!-- contains the methods needed for tokenization -->
+<script>
+
+    var tokenizer = null;
+
+    const initHostedTokenization = () => {
+        fetch('/api/hostedtokenization')
+            .then(response => response.json())
+            .then(hostedTokenization => {
+                // to tokenise credit card data. Load it to the form into an existing DOM element on your check-out page
+                tokenizer = new Tokenizer(hostedTokenization.hostedTokenizationUrl, 'div-hosted-tokenization', {hideCardholderName: false});
+
+                tokenizer.initialize().then(() => {
+                    const hosteTokenizationIFrame = document.getElementById('hosted-tokenization-iframe');
+                    hosteTokenizationIFrame.classList.remove("hidden");
+                })
+                    .catch(reason => {
+                        // Handle iFrame load error
+                    })
+            });
+    };
+
+    // Function to create a new hosted checkout basic
+    const createPaymentForHostedTokenization = (amount, currency, hostedTokenizationId) => {
+        fetch('/api/hostedtokenization/basic', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({amount, currency, hostedTokenizationId}),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then((data) => {
+                window.location.href = '/hostedtokenization/outcome.html?paymentId=' + data.payment.id;
+            });
+    };
+
+    function submitForm() { //
+        tokenizer.submitTokenization().then((result) => {
+            if (result.success) {
+                const hostedCheckoutAmount = document.getElementById('hosted-tokenization-amount');
+                const hostedCheckoutCurrency = document.getElementById('hosted-tokenization-currency');
+
+                createPaymentForHostedTokenization(
+                    hostedCheckoutAmount.value,
+                    hostedCheckoutCurrency.value,
+                    result.hostedTokenizationId
+                );
+            } else {
+                console.log(result.error.message);
+                alert(result.error.message);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

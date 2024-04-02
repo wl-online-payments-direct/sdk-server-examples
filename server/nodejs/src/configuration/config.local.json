@@ -1,0 +1,10 @@
+{
+    "merchantId": "<your-merchant-id>",
+    "apiKey": "<your-api-key>",
+    "apiSecret": "<your-api-secret>",
+    "host": "payment.preprod.direct.worldline-solutions.com",
+    "integrator": "<your-company-name>",
+    "hostedCheckout": {
+        "redirectUrl": "<your-hosted-checkout-redirect-url>"
+    }
+}

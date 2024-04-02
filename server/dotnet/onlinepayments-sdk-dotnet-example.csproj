@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyVersion>0.0.8</AssemblyVersion>
+    <Version>0.0.8</Version>
+    <Company>Online Payments</Company>
+    <Product>Online Payments .NET SDK Example</Product>
+    <Description>Example Application that uses the .NET SDK to communicate with the payment platform using the Online Payments Server API</Description>
+    <Copyright>Copyright (c) 2020 Ingenico e-Commerce Solutions B.V.</Copyright>
+    <Authors>Online Payments</Authors>
+    <PackageProjectUrl>https://github.com/wl-online-payments-direct/sdk-dotnet-example</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/wl-online-payments-direct/sdk-dotnet-example</RepositoryUrl>    
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>OnlinePayments.Sdk.Example</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OnlinePayments.Sdk" Version="3.20.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,90 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    margin: 60px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 60%;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007b7c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    background-color: #f9f9f9;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #999;
+}
+
+select {
+    padding: 10px;              /* Padding for the text inside the select box */
+    border: 1px solid #ccc;    /* Border around the select box */
+    border-radius: 4px;        /* Rounded corners for the select box */
+    background-color: #fff;    /* Background color */
+    color: #333;               /* Text color */
+}
+
+/* Style the select when it's hovered over */
+select:hover {
+    border-color: #007b7c;     /* Border color on hover */
+}
+
+/* Style the select when it's focused (clicked) */
+select:focus {
+    border-color: #007b7c;     /* Border color when focused */
+    outline: none;             /* Remove the default outline */
+    box-shadow: 0 0 5px rgba(0, 123, 124, 0.5); /* Add a subtle shadow when focused */
+}
+
+select option {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Style the <pre> element */
+pre {
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    text-align: left; /* Left-align text */
+    border: 1px solid #ccc; /* Add a border for clarity */
+    padding: 10px; /* Add padding for spacing */
+}
+
+#redirect-url {
+    margin-top: 10px;
+    margin-right: 75px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}

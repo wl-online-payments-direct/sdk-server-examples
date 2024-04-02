@@ -1,0 +1,30 @@
+{
+    "name": "onlinepayments/onlinepayments-sdk-php-example",
+    "description": "Example application that uses PHP SDK to communicate with the payment platform using the server API",
+    "type": "project",
+    "require": {
+        "php": "^8.1",
+        "slim/slim": "^4.12",
+        "slim/psr7": "^1.6",
+        "laminas/laminas-diactoros":"^3.3",
+        "php-di/slim-bridge": "^3.4",
+        "wl-online-payments-direct/sdk-php": "^5.13",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "platform": {
+            "php": "8.1.0"
+        }
+    }
+}

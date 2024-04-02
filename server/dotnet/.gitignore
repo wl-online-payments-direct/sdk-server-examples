@@ -1,0 +1,62 @@
+# .NET build and runtime directories
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+AnyCPU/
+*.suo
+*.user
+*.bak
+*.vscode/
+.vs/
+.vs2019/
+*.dbmdl
+*.jfm
+*.sln.docstates
+
+# Visual Studio files
+*.suo
+*.user
+*.sln.docstates
+*.userprefs
+*.suo
+*.suo
+*.suo
+*.suo
+*.suo
+
+# Rider
+.idea/
+*.sln.iml
+
+# User-specific files
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Project-specific files
+npm-debug.log
+*.sln.iml
+
+# Rider
+.idea/
+*.sln.iml
+
+# User-specific files
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# Project-specific files
+npm-debug.log
+*.sln.iml
+
+# Development settings
+*.Development.json
+
+# OS files
+.DS_Store
