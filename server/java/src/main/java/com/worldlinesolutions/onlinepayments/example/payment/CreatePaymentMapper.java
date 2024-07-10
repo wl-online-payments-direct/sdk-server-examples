@@ -1,7 +1,6 @@
 package com.worldlinesolutions.onlinepayments.example.payment;
 
 import com.onlinepayments.domain.*;
-import com.worldlinesolutions.onlinepayments.example.hostedcheckout.CreateHostedCheckoutBasicDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

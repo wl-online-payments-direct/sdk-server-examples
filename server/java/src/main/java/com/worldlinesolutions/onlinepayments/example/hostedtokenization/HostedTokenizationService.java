@@ -1,7 +1,5 @@
 package com.worldlinesolutions.onlinepayments.example.hostedtokenization;
 
-import com.onlinepayments.domain.CreateHostedCheckoutRequest;
-import com.onlinepayments.domain.CreateHostedCheckoutResponse;
 import com.onlinepayments.domain.CreateHostedTokenizationRequest;
 import com.onlinepayments.domain.CreateHostedTokenizationResponse;
 import com.onlinepayments.merchant.MerchantClientInterface;

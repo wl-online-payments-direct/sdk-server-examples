@@ -1,0 +1,11 @@
+# public contents
+public/*
+
+# local configs
+config/environments/local.rb
+
+# tmp folder
+tmp/*
+
+# log folder
+log/*

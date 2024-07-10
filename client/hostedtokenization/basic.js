@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const hostedTokenizationButton = document.getElementById('hostedTokenizationButton');
+    
+    hostedTokenizationButton.addEventListener('click', function() {
+        initHostedTokenization();
+    });
+
     const hostedTokenizationAmount = document.getElementById('hosted-tokenization-amount');
 
     // Initialize Inputmask with a decimal number mask format
