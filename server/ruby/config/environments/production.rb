@@ -1,3 +1,4 @@
+require "ostruct"
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -112,11 +113,11 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   # Online Payments SDK Configuration
-  config.merchantId = "<your-merchant-id>"
-  config.apiKey = "<your-api-key>"
-  config.apiSecret = "<your-api-secret>"
-  config.host = "payment.preprod.direct.worldline-solutions.com"
-  config.integrator = "<your-company-name>"
+  config.merchantId = ENV["MERCHANT_ID"] || "<your-merchant-id>"
+  config.apiKey = ENV["API_KEY"] || "<your-api-key>"
+  config.apiSecret = ENV["API_SECRET"] || "<your-api-secret>"
+  config.host = ENV["HOST"] || "payment.preprod.direct.worldline-solutions.com"
+  config.integrator = ENV["INTEGRATOR"] || "<your-company-name>"
   config.hostedCheckout = OpenStruct.new
-  config.hostedCheckout.redirectUrl = "<your-hosted-checkout-redirect-url>"
+  config.hostedCheckout.redirectUrl = ENV["HOSTED_CHECKOUT_REDIRECT_URL"] || "<your-hosted-checkout-redirect-url>"
 end

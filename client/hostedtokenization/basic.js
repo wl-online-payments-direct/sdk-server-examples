@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const hostedTokenizationButton = document.getElementById('hostedTokenizationButton');
-    
+
     hostedTokenizationButton.addEventListener('click', function() {
         initHostedTokenization();
     });

@@ -36,7 +36,7 @@ class HostedTokenizationController < ApplicationController
   private
 
   def input_params
-    params.permit(:amount, :currency, :redirectUrl)
+    params.permit(:amount, :currency, :redirectUrl, :hostedTokenizationId)
   end
 
 end
