@@ -5,7 +5,7 @@ include OnlinePayments::SDK::Domain
 
 class HostedTokenizationMapper
 
-  def self.to_hosted_tokenization_payment_request(create_hosted_tokenizaiton_basic_dto)
+  def self.to_hosted_tokenization_payment_request(create_hosted_tokenization_basic_dto)
     create_payment_request = CreatePaymentRequest.new
 
     card_payment_method_specific_input = CardPaymentMethodSpecificInput.new
@@ -14,8 +14,8 @@ class HostedTokenizationMapper
     order = Order.new
 
     amount_of_money = AmountOfMoney.new
-    amount_of_money.amount = PaymentUtils.to_amount(create_hosted_tokenizaiton_basic_dto.amount)
-    amount_of_money.currency_code = create_hosted_tokenizaiton_basic_dto.currency
+    amount_of_money.amount = PaymentUtils.to_amount(create_hosted_tokenization_basic_dto.amount)
+    amount_of_money.currency_code = create_hosted_tokenization_basic_dto.currency
 
     order.amount_of_money = amount_of_money
 
@@ -42,7 +42,7 @@ class HostedTokenizationMapper
 
     create_payment_request.order = order
     create_payment_request.card_payment_method_specific_input = card_payment_method_specific_input
-    create_payment_request.hosted_tokenization_id = create_hosted_tokenizaiton_basic_dto.hosted_tokenization_id
+    create_payment_request.hosted_tokenization_id = create_hosted_tokenization_basic_dto.hosted_tokenization_id
 
     return create_payment_request
 
