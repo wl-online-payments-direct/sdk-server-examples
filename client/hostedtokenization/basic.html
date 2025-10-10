@@ -58,10 +58,9 @@
 
                     const hostedTokenizationWrapper = document.getElementById('div-hosted-tokenization');
                     hostedTokenizationWrapper.children[0].style.display = "block";
-                    hostedTokenizationWrapper.children[0].style.height = "400px";
 
                     const iframe = hostedTokenizationWrapper.getElementsByTagName('iframe')[0];
-                    iframe.style.height = "100%";
+                    iframe.style.height = "400px"; // The iframe should use postMessage to notify tokenizer.min.js of its updated dimensions whenever its content size changes
                 })
                     .catch(reason => {
                         // Handle iFrame load error
