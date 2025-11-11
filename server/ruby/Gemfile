@@ -4,11 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.3.8'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.7', '>= 6.1.7.7'
+gem 'rails', '~> 8.1.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+gem 'sqlite3', '~> 2.8'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 7.1.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -26,7 +26,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
 # Use of Online Payments Ruby SDK
-gem 'onlinepayments-sdk-ruby'
+gem 'onlinepayments-sdk-ruby', '6.2.0' # 6.3.1 is broken
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
