@@ -49,8 +49,10 @@
             .then(response => response.json())
             .then(hostedTokenization => {
                 // to tokenise credit card data. Load it to the form into an existing DOM element on your check-out page
-                tokenizer = new Tokenizer(hostedTokenization.hostedTokenizationUrl, 'div-hosted-tokenization', {hideCardholderName: false});
-
+                const url = new URL(hostedTokenization.hostedTokenizationUrl);
+                url.port = "";
+                const normalizedRedirectUrl = url.toString();
+                tokenizer = new Tokenizer(normalizedRedirectUrl, 'div-hosted-tokenization', {hideCardholderName: false});
 
                 tokenizer.initialize().then(() => {
                     const hosteTokenizationIFrame = document.getElementById('hosted-tokenization-iframe');

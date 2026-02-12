@@ -8,6 +8,7 @@ class MerchantClientConfig
     communicatorConfiguration.api_key_id = Rails.configuration.apiKey
     communicatorConfiguration.secret_api_key = Rails.configuration.apiSecret
     communicatorConfiguration.authorization_type = 'v1HMAC'
+    communicatorConfiguration.integrator = Rails.configuration.integrator
 
     client = Factory.create_client_from_configuration(communicatorConfiguration)
 
