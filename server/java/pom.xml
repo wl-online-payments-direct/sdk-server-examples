@@ -1,77 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+
     <groupId>com.worldline-solutions</groupId>
     <artifactId>onlinepayments-sdk-java-example</artifactId>
-    <version>0.0.8</version>
+    <version>1.0.0</version>
 
     <name>onlinepayments-sdk-java-example</name>
-    <description>Example application that uses Java SDK to communicate with the payment platform using the server API</description>
-
-    <organization>
-        <name>Worldline Online Payments Direct</name>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>https://github.com/wl-online-payments-direct/sdk-java-example/LICENSE.txt</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Worldline Direct support team</name>
-            <email>82139942+worldline-direct-support-team@users.noreply.github.com</email>
-            <organization>Worldline Online Payments Direct</organization>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:git@github.com:wl-online-payments-direct/sdk-java-example.git</connection>
-        <developerConnection>scm:git:git@github.com:wl-online-payments-direct/sdk-java-example.git</developerConnection>
-        <url>https://github.com/wl-online-payments-direct/sdk-java-example</url>
-    </scm>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/wl-online-payments-direct/sdk-java-example/issues</url>
-    </issueManagement>
+    <description>
+        Example application that uses Java SDK to communicate with the payment platform using the server API
+    </description>
 
     <properties>
-        <java.version>11</java.version>
-        <online-payments.version>4.14.0</online-payments.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+        <!-- Online Payments SDK -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>com.worldline-solutions</groupId>
+            <artifactId>onlinepayments-sdk-java</artifactId>
+            <version>7.2.0</version>
         </dependency>
+
+        <!-- Spring Context for @Configuration, @Bean, etc. -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>3.5.4</version>
         </dependency>
 
         <dependency>
-            <groupId>com.worldline-solutions</groupId>
-            <artifactId>onlinepayments-sdk-java</artifactId>
-            <version>${online-payments.version}</version>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.5.Final</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -79,6 +60,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.5.4</version>
             </plugin>
         </plugins>
     </build>

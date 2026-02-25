@@ -1,0 +1,21 @@
+@use "../../styles/variables";
+
+.wl-radio-group {
+  display: inline-flex;
+  gap: 20px;
+
+  .wlp-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    line-height: 1;
+    font-size: 16px;
+    cursor: pointer;
+
+    input {
+      margin: 0;
+      cursor: pointer;
+      accent-color: variables.$color-dark-gray;
+    }
+  }
+}

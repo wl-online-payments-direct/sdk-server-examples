@@ -1,0 +1,32 @@
+@use "../../../styles/variables";
+
+.wl-header {
+  position: relative;
+  line-height: 1.5;
+  background-color: variables.$background-color-header;
+  display: flex;
+  padding: 8px 12px;
+
+  .wlp-container {
+    display: flex;
+    width: 100%;
+
+    .wlp-logo {
+      color: variables.$color-white;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-right: 16px;
+      font-size: 20px;
+      text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .wl-header-container-logo {
+    font-size: 16px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}

@@ -1,0 +1,27 @@
+@use "../../styles/variables";
+
+.wl-select {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+
+  &.wls--error .wlp-select {
+    border: 1px solid variables.$error-color;
+  }
+
+  .wlp-select {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 6px;
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius;
+    width: 100%;
+    background-color: variables.$color-white;
+
+    option {
+      padding: 10px;
+      font-size: inherit;
+    }
+  }
+}

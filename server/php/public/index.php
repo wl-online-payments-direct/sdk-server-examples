@@ -1,88 +1,116 @@
 <?php
 
-require 'vendor/autoload.php';
-require_once 'src/Configuration/Bindings.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use DI\ContainerBuilder;
-use MyApp\Configuration\Bindings;
-use MyApp\Configuration\Environment;
+use Dotenv\Dotenv;
+use OnlinePayments\ExampleApp\Presentation\Controllers\HostedTokenizationController;
+use OnlinePayments\ExampleApp\Presentation\Controllers\PaymentController;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Slim\Psr7\Factory\ServerRequestFactory;
 use Slim\Factory\AppFactory;
-use Slim\Psr7\Request;
-use Slim\Psr7\Response;
+use OnlinePayments\ExampleApp\Configuration\DIConfiguration as CoreDI;
+use OnlinePayments\ExampleApp\Infrastructure\DIConfiguration as InfrastructureDI;
+use OnlinePayments\ExampleApp\Application\DIConfiguration as ApplicationDI;
+use OnlinePayments\ExampleApp\Presentation\DIConfiguration as PresentationDI;
+use OnlinePayments\ExampleApp\Presentation\Middleware\GlobalExceptionMiddleware;
+use OnlinePayments\ExampleApp\Presentation\Controllers\HostedCheckoutController;
+use OnlinePayments\ExampleApp\Presentation\Controllers\PaymentLinkController;
 
-// Load the environment settings
-Environment::init();
+/**
+ * @throws Exception
+ */
+function buildContainer(string $projectRoot): ContainerInterface
+{
+    $builder = new ContainerBuilder();
 
-// Create the $container instance
-$containerBuilder = new ContainerBuilder();
-$container = $containerBuilder->build();
+    $coreDI = new CoreDI($projectRoot);
+    $coreDI->configure($builder);
 
-// Create DI Bingings
-Bindings::createBindings($container);
+    InfrastructureDI::configure($builder);
+    ApplicationDI::configure($builder);
+    PresentationDI::configure($builder, $projectRoot);
 
-// Create the app
-AppFactory::setContainer($container);
-$app = AppFactory::create();
+    return $builder->build();
+}
 
-// Add controller routes
-$app->get('/api/createpayment', 'MyApp\Payment\CreatePaymentController:initializeRequest');
-$app->get('/api/createpayment/outcome', 'MyApp\Payment\CreatePaymentController:getPaymentResponse');
-$app->post('/api/createpayment/basic', 'MyApp\Payment\CreatePaymentController:createPaymentRequest');
+function createRequest(): ServerRequestInterface
+{
+    return ServerRequestFactory::createFromGlobals();
+}
 
-$app->get('/api/hostedtokenization', 'MyApp\HostedTokenization\HostedTokenizationController:getHostedTokenization');
-$app->get('/api/hostedtokenization/outcome', 'MyApp\HostedTokenization\HostedTokenizationController:getPaymentResponse');
-$app->post('/api/hostedtokenization/basic', 'MyApp\HostedTokenization\HostedTokenizationController:createHostedTokenization');
+function emitResponse(ResponseInterface $response): void
+{
+    http_response_code($response->getStatusCode());
 
-$app->get('/api/hostedcheckout', 'MyApp\HostedCheckout\HostedCheckoutController:getCreateHostedCheckout');
-$app->get('/api/hostedcheckout/outcome', 'MyApp\HostedCheckout\HostedCheckoutController:getPaymentResponse');
-$app->post('/api/hostedcheckout/basic', 'MyApp\HostedCheckout\HostedCheckoutController:createHostedCheckout');
-
-// Add similar routes for products and orders
-
-// Redirect the root url to index.html
-$app->get('/', function (Request $request, Response $response) {
-    return $response
-        ->withHeader('Location', "/index.html")
-        ->withHeader('Content-Type', 'text/html; charset=UTF-8')
-        ->withStatus(302);
-});
-
-// Include the static client pages
-$app->get('[/{path:.*}]', function (Request $request, Response $response, array $args) {
-
-    $path = "/../../../client/".$args['path'];
-
-    $file = realpath(__DIR__.$path);
-
-    if (!file_exists($file)) {
-        return $response->withStatus(404, 'File Not Found');
+    foreach ($response->getHeaders() as $name => $values) {
+        foreach ($values as $value) {
+            header(sprintf('%s: %s', $name, $value), false);
+        }
     }
 
-    switch (pathinfo($file, PATHINFO_EXTENSION)) {
-        case 'css':
-            $mimeType = 'text/css';
-            break;
+    echo $response->getBody();
+}
 
-        case 'js':
-            $mimeType = 'application/javascript';
-            break;
+$projectRoot = __DIR__ . '/..';
 
-        // Add more supported mime types per file extension as you need here
+try {
+    $container = buildContainer($projectRoot);
+} catch (Exception $e) {
+    throw new RuntimeException('Unable to build container.', 0, $e);
+}
 
-        default:
-            $mimeType = 'text/html';
+$request = createRequest();
+try {
+    AppFactory::setContainer($container);
+    $app = AppFactory::create();
+
+    $app->addBodyParsingMiddleware();
+    $app->addRoutingMiddleware();
+
+    if ($container->has(GlobalExceptionMiddleware::class)) {
+        $app->add($container->get(GlobalExceptionMiddleware::class));
     }
 
-    $fileContents = file_get_contents($file);
+    $app->add(function ($request, $handler) use ($projectRoot) {
+        $response = $handler->handle($request);
 
-    if ($fileContents !== false) {
-        $newResponse = $response->withHeader('Content-Type', $mimeType . '; charset=UTF-8');
-        $newResponse->getBody()->write($fileContents);
-        return $newResponse;
-    } else {
-        throw new \RuntimeException("Failed to read file: " . $file);
-    }
+        $dotenv = Dotenv::createImmutable($projectRoot);
+        $dotenv->load();
 
-});
+        $allowedOrigin = $_ENV['ALLOWED_ORIGIN'];
 
-$app->run();
+        return $response
+            ->withHeader('Access-Control-Allow-Origin', $allowedOrigin)
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->withHeader(
+                'Access-Control-Allow-Headers',
+                'Content-Type, Authorization, X-Requested-With'
+            );
+    });
+
+    $app->options('/{routes:.+}', function ($request, $response) {
+        return $response;
+    });
+
+
+    $app->post('/sessions', HostedCheckoutController::class . ':createHostedCheckoutSessions');
+    $app->get('/sessions/{id}', HostedCheckoutController::class . ':getPaymentByHostedCheckoutId');
+    $app->post('/links', PaymentLinkController::class . ':createPaymentLink');
+    $app->get('/tokens', HostedTokenizationController::class . ':getHostedTokenizationSessions');
+    $app->post('/payments', PaymentController::class . ':createPayment');
+    $app->get('/payments/{id}', PaymentController::class . ':getPaymentDetails');
+    $app->post('/payments/{id}/captures', PaymentController::class . ':capturePayment');
+    $app->post('/payments/{id}/refunds', PaymentController::class . ':refundPayment');
+    $app->post('/payments/{id}/cancels', PaymentController::class . ':cancelPayment');
+
+    $response = $app->handle($request);
+} catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
+    throw new RuntimeException('Unable to dispatch request.', 0, $e);
+}
+
+emitResponse($response);

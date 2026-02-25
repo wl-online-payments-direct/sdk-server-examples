@@ -1,0 +1,26 @@
+@use "../../styles/variables";
+
+.wl-address-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid variables.$border-color;
+  padding: 15px;
+
+  .wlp-label {
+    margin-bottom: 20px;
+  }
+
+  .wlp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 15px;
+    column-gap: 10px;
+    border: 1px solid variables.$border-color;
+    row-gap: 20px;
+
+    .wlp-grid-item {
+      grid-column: span 1;
+    }
+  }
+}

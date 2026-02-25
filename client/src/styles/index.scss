@@ -1,0 +1,41 @@
+@use "../styles/variables";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Arial, sans-serif;
+  color: variables.$text-color;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+}
+
+button {
+  font-size: inherit;
+  background-color: variables.$button-background-color;
+  color: variables.$color-white;
+  width: fit-content;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}

@@ -1,0 +1,22 @@
+@use "../../styles/variables";
+
+.wl-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  &.wls--error .wlp-input {
+    border: 1px solid variables.$error-color;
+  }
+
+  .wlp-input {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 6px;
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius;
+    width: 100%;
+  }
+}
+

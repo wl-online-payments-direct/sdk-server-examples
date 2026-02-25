@@ -1,0 +1,57 @@
+@use "../styles/variables";
+
+.wl-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 60px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: variables.$background-color-primary;
+
+  &.wlv--padding-uniform {
+    padding: 24px;
+  }
+
+  &.wlv--padding-bottom-larger {
+    padding: 24px 24px 64px 24px;
+  }
+
+  .wlp-header {
+    margin-bottom: 32px;
+  }
+
+  .wlp-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    .wlp-details {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 10px;
+      column-gap: 10px;
+    }
+
+    .wlp-expiry-date {
+      gap: 5px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .wlp-iframe iframe {
+    border: none;
+    width: 100%;
+  }
+
+  .wlp-button {
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}

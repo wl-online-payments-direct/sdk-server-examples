@@ -2,58 +2,85 @@
 
 This example app illustrates the use of the Online Payments Java SDK and the services provided by the Online Payments platform.
 
-## Prerequisites
+## Recommended Development Environment
 
-- JDK 17+
+- IntelliJ IDEA or Eclipse
+
+## How To Run
+
+### Running locally:
+
+```markdown
+Prerequisites:
+- JDK 21
 - [Git](https://git-scm.com/)
+``` 
 
-## Getting started
+#### Configuration (application.properties)
 
-To get started with this example application, clone or download the source from Git.
+Before running the backend, you must configure the required credentials in `application.properties` in
+`java/src/main/resources`.  
+You can use `application.properties.example` as a template.
+Update `merchantId`, `apiKey`, `apiSecret` and `apiEndpoint` with valid values for your environment.
 
-<b>IMPORTANT:</b> Before installing and running the application some basic configuration has to be set.
-Set your configuration details in the [application.properties](src/main/resources/application.properties)
+#### Clean build (recommended)
 
-```
-# Direct SDK Configuration
-merchantId=<your-merchant-id>
-merchantKey=<your-api-key>
-merchantSecret=<your-api-secret>
-apiEndpoint=<api-endpoint>
+Run these commands before starting the backend:
 
-# Hosted checkout configuration :: testing purposes
-hostedCheckout.redirectUrl=<your-hosted-checkout-redirect-url>
-```
-
-Build and run the application 
-
-```
-mvn spring-boot:run
+```bash
+  mvn clean install
+  mvn spring-boot:run
 ```
 
-Access the application: http://localhost:8999
+#### Running the backend through IDE
 
-### Available scenarios
+Running the Backend in IntelliJ:
 
-- Create Payment - Basic: http://localhost:8999/createpayment/basic.html
-- Hosted Checkout - Basic: http://localhost:8999/hostedcheckout/basic.html
-- Hosted Tokenization - Basic: http://localhost:8999/hostedtokenization/basic.html
+1. Open IntelliJ.
+2. Go to: File → Open… and select: server/server/java.
+3. Go to Run → Edit Configurations... .
+4. Make sure selected Java version is 21 or higher.
+5. For the main class, select `com.onlinepayments.example.Application` and save the configuration.
+6. The backend will start and run using its default configuration.
 
-## Useful information
+After startup, the backend will be available on the `http://localhost:3000`.
 
-In order to test the example application properly and see how the callbacks from the API works, 
-a tunneling service like [ngrok](https://ngrok.com/) can be used in order the links for the outcomes to be reachable.
+### Running on Docker:
 
-- Example of redirect url if exposed via ngrok:
-```
-# Hosted checkout configuration :: testing purposes
-hostedCheckout.redirectUrl=https://nice-small-app.ngrok-free.app/hostedcheckout/outcome.html
-```
-
-- Example of running the ngrok script
-
-```
-./ngrok http --domain=nice-small-app.ngrok-free.app 8999
+```markdown
+Prerequisites:
+- Docker installed and running
 ```
 
-If everything is properly set then the application should be accessed on this link: https://nice-small-app.ngrok-free.app
+#### Clean build (recommended)
+Run this command before starting the backend:
+
+```bash
+#in cmd:
+rmdir /s /q target
+```
+```bash
+#in powershell:
+Remove-Item -Recurse -Force .\target
+```
+
+#### Build the Docker image and run from the terminal
+```bash
+docker build -t java-sdk-example:21 .
+
+docker run --rm -p 3000:3000 java-sdk-example:21
+```
+
+#### Running from IDE (IntelliJ)
+
+1. Go to Run → Edit Configurations.
+2. Click Add New → From Dockerfile.
+3. Enter a name for the Docker image (e.g., java-sdk-example:21).
+4. Go to Modify Run Options and enable Bind Ports.
+5. Go to Browse to open the port mapping dialog and click the + button to add a port mapping:
+   - Host port: 3000
+   - Container port: 3000
+6. Save the configuration.
+7. Run the configuration in IntelliJ.
+
+After startup, the backend will be available on the http://localhost:3000.

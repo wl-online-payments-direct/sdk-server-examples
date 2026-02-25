@@ -2,62 +2,98 @@
 
 This example app illustrates the use of the Online Payments PHP SDK and the services provided by the Online Payments platform.
 
-## Prerequisites
+## Recommended Development Environment
 
-- PHP 8.0+
+- PHP Storm
+
+## How To Run
+
+### Configuration (.env)
+Before running the backend, you must create `php/.env` file and configure the required credentials.  
+You can use `.env.example` as a template.
+Update `merchantId`, `apiKey`, `apiSecret`, `apiEndpoint` and `allowedOrigin` with valid values for your environment.
+
+### Running locally:
+
+```markdown
+Prerequisites:
+- PHP 8.2+
 - [Git](https://git-scm.com/)
+``` 
 
-## Getting started
+#### Clean build (recommended)
+Run these commands before starting the backend:
 
-To get started with this example application, clone or download the source from Git.
+```bash
+#in cmd
+rm -rf vendor
 
-<b>IMPORTANT:</b> Before installing and running the application some basic configuration has to be set.
-Set your configuration details in the [.env](.env)
+composer clear-cache
 
-```
-# Direct SDK Configuration
-MERCHANT_ID=<your-merchant-id>
-API_KEY=<your-api-key>
-API_SECRET=<your-api-secret>
-API_ENDPOINT=payment.preprod.direct.worldline-solutions.com
-
-# Hosted checkout configuration :: testing purposes
-HOSTED_CHECKOUT_REDIRECT_URL=<your-hosted-checkout-redirect-url>
+composer install --no-interaction --prefer-dist --optimize-autoloader
 ```
 
-Build and run the application 
+```bash
+#in powershell
+Remove-Item -Recurse -Force .\vendor
 
-```
-cd server/php
-composer install && php -S localhost:8000 public/index.php
-```
+composer clear-cache
 
-Access the application: http://localhost:8000
-
-### Available scenarios
-
-- Create Payment - Basic: http://localhost:8000/createpayment/basic.html
-- Hosted Checkout - Basic: http://localhost:8000/hostedcheckout/basic.html
-- Hosted Tokenization - Basic: http://localhost:8000/hostedtokenization/basic.html
-
-## Useful information
-
-In order to test the example application properly and see how the callbacks from the API works, 
-a tunneling service like [ngrok](https://ngrok.com/) can be used in order the links for the outcomes to be reachable.
-
-- Example of redirect url if exposed via ngrok:
-```
-# Hosted checkout configuration :: testing purposes
-hostedCheckout.redirectUrl=https://nice-small-app.ngrok-free.app/hostedcheckout/outcome.html
-
-# Create payment configuration :: testing purposes
-createPayment.3ds.returnUrl=https://nice-small-app.ngrok-free.app/createpayment/3ds-returnUrl.html
+composer install --no-interaction --prefer-dist --optimize-autoloader
 ```
 
-- Example of running the ngrok script
+#### Running the backend through the terminal
+1. Open your IDE (PhpStorm) and open the project folder server/php.
+2. In the IDE terminal run: `php -S localhost:3000 -t public`
 
-```
-./ngrok http --domain=nice-small-app.ngrok-free.app 8000
+#### Running the backend through the IDE
+1. Go to Run → Edit Configurations → + → PHP Built-in Web Server.
+2. For the custom working directory, select `server\php\public`.
+3. Set port to `3000`.
+4. Rename the configuration (optional) and save the configuration.
+5. Click the run button and the backend will start.
+
+### Running on Docker:
+
+```markdown
+Prerequisites:
+- Docker installed and running
+``` 
+
+#### Clean build (recommended)
+Run these commands before starting the backend:
+
+```bash
+#in cmd
+rm -rf vendor
+
+docker run --rm -v "${PWD}:/app" -w /app -v composer-cache:/tmp/cache -e COMPOSER_CACHE_DIR=/tmp/cache composer:2 install --no-interaction --prefer-dist --optimize-autoloader
 ```
 
-If everything is properly set then the application should be accessed on this link: https://nice-small-app.ngrok-free.app
+```bash
+#in powershell
+Remove-Item -Recurse -Force .\vendor
+
+docker run --rm -v "${PWD}:/app" -w /app -v composer-cache:/tmp/cache -e COMPOSER_CACHE_DIR=/tmp/cache composer:2 install --no-interaction --prefer-dist --optimize-autoloader
+```
+
+#### Build the Docker image and run from the terminal
+```bash
+docker build -t php-sdk-example:8.2 .
+
+docker run --rm -v "${PWD}:/app" -p 3000:3000 php-sdk-example:8.2
+```
+
+#### Running from IDE (PhpStorm)
+
+1. Go to Run → Edit Configurations.
+2. Click Add New → From Dockerfile.
+3. Enter a name for the Docker image (e.g., php-sdk-example:8.2).
+4. Go to Modify Run Options and enable Bind Ports.
+5. Go to Browse to open the port mapping dialog and click the + button to add a port mapping:
+   - Host port: 3000
+   - Container port: 3000
+6. Save the configuration.
+7. Run the configuration in PhpStorm
+
+After startup, the backend will be available on the http://localhost:3000.

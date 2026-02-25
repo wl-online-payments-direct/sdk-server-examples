@@ -1,0 +1,63 @@
+@use "../../styles/variables";
+
+.wl-toast {
+  position: fixed;
+  bottom: 64px;
+  right: 16px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  z-index: 9999;
+  width: 320px;
+
+  @media (max-width: 767px) {
+    max-width: calc(100vw - 32px);
+    margin-left: 20px;
+  }
+
+  .wlp-toast {
+    position: relative;
+    background-color: variables.$color-white;
+    color: variables.$text-color;
+    padding: 16px 48px 16px 24px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    &.wlt--error {
+      border: 1px solid variables.$error-color;
+      background-color: variables.$error-color;
+      color: variables.$color-white;
+    }
+
+    &.wlt--warning {
+      border: 1px solid variables.$warning-color;
+      background-color: variables.$warning-color;
+      color: variables.$color-white;
+    }
+
+    &.wlt--info {
+      border: 1px solid variables.$info-color;
+    }
+
+    .wlp-close-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 16px;
+      color: inherit;
+      border: none;
+      border-radius: variables.$border-radius;
+      background-color: transparent;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+
+      &:hover {
+        border: 1px solid;
+      }
+    }
+  }
+}

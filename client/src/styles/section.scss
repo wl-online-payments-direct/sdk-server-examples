@@ -1,0 +1,33 @@
+@use "../styles/variables";
+
+.wl-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  margin: 0 0 60px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: variables.$background-color-primary;
+  gap: 15px;
+
+  .wlp-header {
+    text-align: center;
+    width: 100%;
+  }
+
+  .wlp-content {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    gap: 5px;
+
+    input {
+      flex: 1 1 auto;
+    }
+
+    button {
+      flex: 0 0 auto;
+    }
+  }
+}

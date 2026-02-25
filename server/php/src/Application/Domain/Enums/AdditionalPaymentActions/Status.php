@@ -1,0 +1,21 @@
+<?php
+
+namespace OnlinePayments\ExampleApp\Application\Domain\Enums\AdditionalPaymentActions;
+
+enum Status: string
+{
+    case CREATED = 'CREATED';
+    case CANCELLED = 'CANCELLED';
+    case REJECTED = 'REJECTED';
+    case REJECTED_CAPTURE = 'REJECTED_CAPTURE';
+    case REDIRECTED = 'REDIRECTED';
+    case PENDING_PAYMENT = 'PENDING_PAYMENT';
+    case PENDING_COMPLETION = 'PENDING_COMPLETION';
+    case PENDING_CAPTURE = 'PENDING_CAPTURE';
+    case AUTHORIZATION_REQUESTED = 'AUTHORIZATION_REQUESTED';
+    case CAPTURE_REQUESTED = 'CAPTURE_REQUESTED';
+    case CAPTURED = 'CAPTURED';
+    case REVERSED = 'REVERSED';
+    case REFUND_REQUESTED = 'REFUND_REQUESTED';
+    case REFUNDED = 'REFUNDED';
+}
