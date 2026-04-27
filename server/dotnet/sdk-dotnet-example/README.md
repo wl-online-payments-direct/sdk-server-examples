@@ -1,7 +1,6 @@
 ﻿# Online payments .NET SDK Example
 
-This example app illustrates the use of the Online Payments .NET SDK and the services provided by the Online Payments
-platform.
+This example app illustrates the use of the Online Payments .NET SDK and the services provided by the Online Payments platform.
 
 ## Recommended Development Environment
 
@@ -13,18 +12,15 @@ platform.
 
 ```markdown
 Prerequisites:
-
-- .NET 9+
+- .NET 8+
 - [Git](https://git-scm.com/)
 ``` 
 
 #### Configuration (appsettings.json)
-
 Before running the backend, you must configure the required credentials in `appsettings.json`.  
 Update `MerchantId`, `ApiKey`, `ApiSecret` and `ApiEndpoint` with valid values for your environment.
 
 #### Clean build (recommended)
-
 Run these commands before starting the backend:
 
 ```bash
@@ -35,7 +31,6 @@ Run these commands before starting the backend:
 #### Running the backend through IDE
 
 Running the Backend in Rider:
-
 1. Open Rider.
 2. Go to: File → Open… and select: `server/dotnet/sdk-dotnet-example.sln`
 3. Rider will load all .NET projects contained in this solution.
@@ -55,15 +50,15 @@ Prerequisites:
 #### Build the Docker image and run from the terminal
 
 ```bash
-docker build -t sdk-dotnet-example .
+docker build -t dotnet-sdk-example .
 
 docker run -d -p 3000:3000 \
   -e AppSettings__MerchantId=<your-merchant-id> \
   -e AppSettings__ApiKey=<your-api-key> \
   -e AppSettings__ApiSecret=<your-api-secret> \
   -e AppSettings__ApiEndpoint=<api-endpoint> \
-  --name sdk-dotnet-example \
-  sdk-dotnet-example
+  --name dotnet-sdk-example \
+  dotnet-sdk-example
 ```
 
 Replace the placeholder values with your actual credentials.

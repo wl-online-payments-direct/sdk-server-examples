@@ -1,0 +1,9 @@
+# See https://git-scm.com/docs/gitattributes for more about git attribute files.
+
+# Ensure consistent LF line endings for all text files in the repository.
+* text=auto eol=lf
+
+# Mark any vendored files as having been vendored.
+vendor/* linguist-vendored
+config/credentials/*.yml.enc diff=rails_credentials
+config/credentials.yml.enc diff=rails_credentials

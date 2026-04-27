@@ -1,0 +1,29 @@
+{
+    "name": "onlinepayments-sdk-nodejs-example",
+    "version": "1.0.0",
+    "private": "true",
+    "description": "Example application that uses NodeJS SDK to communicate with the payment platform using the server API",
+    "main": "src/index.ts",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "scripts": {
+        "start": "tsx src/index.ts",
+        "typecheck": "tsc --noEmit",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "format:check": "prettier --check \"src/**/*.ts\""
+    },
+    "dependencies": {
+        "@fastify/cors": "^11.2.0",
+        "dotenv": "^17.2.3",
+        "fastify": "5.8.3",
+        "fastify-plugin": "^5.1.0",
+        "onlinepayments-sdk-nodejs": "^7.4.0"
+    },
+    "devDependencies": {
+        "@types/node": "^24",
+        "prettier": "^3.7.4",
+        "tsx": "^4.21.0",
+        "typescript": "5.9.3"
+    }
+}

@@ -1,0 +1,51 @@
+# ----------------------
+# Bundler / gems
+/vendor/bundle
+/.bundle
+
+# ----------------------
+# Rails logs and temp
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
+/tmp/cache/*
+!/tmp/cache/.keep
+
+# ----------------------
+# Rails secrets
+/config/master.key
+/config/credentials.yml.enc
+.env
+
+# ----------------------
+# Editor / IDE
+.idea/
+.vscode/
+*.iml
+*.log
+
+# ----------------------
+# Misc
+*.tmp
+*.bak
+*.orig
+
+# ----------------------
+# Docker
+.dockerignore
+
+vendor/bundle
+vendor
+tmp
+public
+test
+
+Gemfile.lock
+
+.gem_rbs_collection/
+**/rbs_collection/
+**/rbs_collection.yaml
+**/rbs_collection.lock.yaml

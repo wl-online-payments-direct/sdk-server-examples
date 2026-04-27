@@ -1,0 +1,6 @@
+fastapi==0.135.1
+uvicorn[standard]>=0.30.0
+pydantic==2.12.5
+pydantic-settings==2.13.1
+onlinepayments-sdk-python3~=7.3.0
+dependency-injector==4.48.3

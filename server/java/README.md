@@ -66,16 +66,16 @@ Remove-Item -Recurse -Force .\target
 
 #### Build the Docker image and run from the terminal
 ```bash
-docker build -t java-sdk-example:21 .
+docker build -t java-sdk-example .
 
-docker run --rm -p 3000:3000 java-sdk-example:21
+docker run --rm -p 3000:3000 java-sdk-example
 ```
 
 #### Running from IDE (IntelliJ)
 
 1. Go to Run → Edit Configurations.
 2. Click Add New → From Dockerfile.
-3. Enter a name for the Docker image (e.g., java-sdk-example:21).
+3. Enter a name for the Docker image (e.g., java-sdk-example).
 4. Go to Modify Run Options and enable Bind Ports.
 5. Go to Browse to open the port mapping dialog and click the + button to add a port mapping:
    - Host port: 3000

@@ -8,7 +8,10 @@ The project is structured in a way where the client and server concerns are clea
       server/
         dotnet/   - .NET backend implementation
         java/     - Java backend implementation
+        nodejs/   - NodeJS backend implementation 
         php/      - PHP backend implementation
+        python/   - Python3 backend implementation
+        ruby/     - Ruby backend implementation
         ...       - Additional backends (future)
       client/     - JavaScript frontend
 
@@ -32,7 +35,10 @@ Please find more information about the specific for every supported language on 
 
 - [.NET backend](./server/dotnet/sdk-dotnet-example/README.md)
 - [Java backend](./server/java/README.md)
+- [NodeJS backend](./server/nodejs/README.md)
 - [PHP backend](./server/php/README.md)
+- [Python backend](./server/python/README.md)
+- [Ruby backend](./server/ruby/README.md)
 
 ## 2. Client (Frontend JavaScript Application)
 

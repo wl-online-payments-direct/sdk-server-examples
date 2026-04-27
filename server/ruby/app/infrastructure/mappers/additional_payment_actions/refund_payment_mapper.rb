@@ -1,0 +1,33 @@
+module Infrastructure
+  module Mappers
+    module AdditionalPaymentActions
+      module RefundPaymentMapper
+        def self.to_sdk_request(dto)
+          request = OnlinePayments::SDK::Domain::RefundRequest.new
+          request.amount_of_money = Infrastructure::Mappers::AdditionalPaymentActions::AmountOfMoneyMapper.map(dto)
+          request
+        end
+        def self.from_sdk_response(response)
+          response_dto = Business::Dtos::AdditionalPaymentActions::ResponseDto.new
+
+          response_dto.id = response&.id
+          response_dto.status =
+            response&.status ?
+              Business::Domain::Enums::AdditionalPaymentActions::Status.try_from(response.status) :
+              nil
+
+          status_output = Business::Domain::Payments::StatusOutput.new
+          status_output.status_code = response.status_output&.status_code
+          status_output.status_category =
+            response.status_output&.status_category ?
+              Business::Domain::Enums::Common::StatusCategory.try_from(response.status_output.status_category) :
+              nil
+
+          response_dto.status_output = status_output
+
+          response_dto
+        end
+      end
+    end
+  end
+end

@@ -79,16 +79,16 @@ docker run --rm -v "${PWD}:/app" -w /app -v composer-cache:/tmp/cache -e COMPOSE
 
 #### Build the Docker image and run from the terminal
 ```bash
-docker build -t php-sdk-example:8.2 .
+docker build -t php-sdk-example .
 
-docker run --rm -v "${PWD}:/app" -p 3000:3000 php-sdk-example:8.2
+docker run --rm -v "${PWD}:/app" -p 3000:3000 php-sdk-example
 ```
 
 #### Running from IDE (PhpStorm)
 
 1. Go to Run → Edit Configurations.
 2. Click Add New → From Dockerfile.
-3. Enter a name for the Docker image (e.g., php-sdk-example:8.2).
+3. Enter a name for the Docker image (e.g., php-sdk-example).
 4. Go to Modify Run Options and enable Bind Ports.
 5. Go to Browse to open the port mapping dialog and click the + button to add a port mapping:
    - Host port: 3000
